@@ -37,7 +37,7 @@ class TestBookCartSearchFilter:
         Test method to perform search and filter functionality
         """
         # 1. Search for a specific book or category
-        search_input = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Search books']")
+        search_input = driver.find_element(By.CSS_SELECTOR, "input[placeholder='Search books or authors']")
         search_input.send_keys("fiction")
 
         # Click search button
@@ -50,25 +50,25 @@ class TestBookCartSearchFilter:
         )
 
         # 2. Apply Genre Filter
-        genre_filter = driver.find_element(By.XPATH, "//span[contains(text(), 'Fiction')]")
+        genre_filter = driver.find_element(By.XPATH, "/html/body/app-root/div/app-home/div/div[1]/div/app-price-filter/mat-card/mat-card-content[1]/mat-slider/input")
         genre_filter.click()
 
         # 3. Apply Price Range Filter
-        price_min_input = driver.find_element(By.ID, "price-min")
-        price_max_input = driver.find_element(By.ID, "price-max")
+        price_min_input = driver.find_element(By.ID, "111")
+        price_max_input = driver.find_element(By.ID, "1000")
 
         # Set price range (example: $10-$50)
         price_min_input.clear()
-        price_min_input.send_keys("10")
+        price_min_input.send_keys("111")
         price_max_input.clear()
-        price_max_input.send_keys("50")
+        price_max_input.send_keys("1000")
 
         # Apply price filter
-        apply_price_button = driver.find_element(By.ID, "apply-price-filter")
+        apply_price_button = driver.find_element(By.CLASS_NAME, "mdc-slider__input ng-valid ng-dirty ng-touched")
         apply_price_button.click()
 
         # 4. Verify Search Results
-        book_results = driver.find_elements(By.CSS_SELECTOR, ".book-card")
+        book_results = driver.find_elements(By.CLASS_NAME, ".mat-mdc-autocomplete-trigger searchbox ng-valid ng-dirty ng-touched")
 
         # Validate number of results
         assert len(book_results) > 0, "No books found matching the search criteria"
@@ -76,7 +76,7 @@ class TestBookCartSearchFilter:
         # Validate each book's genre and price
         for book in book_results:
             # Check genre
-            book_genre = book.find_element(By.CSS_SELECTOR, ".book-genre").text
+            book_genre = book.find_element(By.CLASS_NAME, ".mat-mdc-autocomplete-trigger searchbox ng-valid ng-dirty ng-touched").text
             assert "Fiction" in book_genre, f"Book {book} is not in Fiction genre"
 
             # Check price
@@ -84,7 +84,7 @@ class TestBookCartSearchFilter:
             assert 10 <= book_price <= 1000, f"Book price {book_price} is outside the specified range"
 
         # Optional: Take screenshot for reporting
-        driver.save_screenshot("search_filter_results.png")
+       # driver.save_screenshot("search_filter_results.png")
 
         # Print total matching books
         print(f"Total matching books: {len(book_results)}")
