@@ -1,8 +1,4 @@
-
-
 # Sorting by values in descending order
-
-
 
 my_dict={"a":3,"b":2,"c":1}
 
