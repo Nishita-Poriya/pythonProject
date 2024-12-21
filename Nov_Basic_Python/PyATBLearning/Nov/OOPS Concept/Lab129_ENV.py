@@ -1,5 +1,7 @@
 # Web Automation - Selenium
 # Page - You are going automate
+from dotenv import load_dotenv
+import os
 
 class VWOLoginPage:
 
@@ -9,17 +11,17 @@ class VWOLoginPage:
 
     def login_confirm(self):
         if self.email == "nishita@gmail.com" and self.password == "Pass123":
-            print("Allowed, Login Sucess")
+            print("Allowed, Login Success")
         else:
             print("Login Failed")
 
+load_dotenv()
 
-email = input("Enter the email \n")
-password = input("Enter the password \n")
-'''
+
+email = os.getenv("EMAIL")
+password = os.getenv("PASSWORD")
+
+print(email, password)
+
 vwo_obj = VWOLoginPage(email, password)
 vwo_obj.login_confirm()
-'''
-
-n1 = VWOLoginPage("nishita@gmail.com", "Pass123")
-n1.login_confirm()
