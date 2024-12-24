@@ -12,7 +12,7 @@ class OldBrowser:
 class Chrome(OldBrowser):
 
     def start_browser(self):
-        super().start_browser() #parent start browser also
+        super().start_browser() #called parent start browser also
         print("Better Chrome browser is starting ....")
         print("-----------")
 
