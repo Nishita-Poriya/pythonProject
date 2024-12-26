@@ -20,3 +20,6 @@ class ICICI(BankAccount):
         print("calling")
 
 
+obj1=ICICI(50000,2352452)
+obj1.withdraw()
+obj1.call_customer_care()
