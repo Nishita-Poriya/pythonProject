@@ -20,6 +20,19 @@ def create_token():
     token = response.json()["token"]
     print(token)
 
+    # Debug print
+    print("Status Code:", response.status_code)
+    print("Response Text:", response.text)
+
+    try:
+        json_response = response.json()
+        token = json_response["token"]
+        return token
+    except KeyError:
+        pytest.fail(f"Token not found in response. Response was: {json_response}")
+    except Exception as e:
+        pytest.fail(f"Unexpected error: {e}")
+
 @pytest.fixture()
 def create_booking_id():
     print("Create booking id !")
@@ -57,4 +70,3 @@ def close_browser():
     print("Closing a browser!! Chrome")
     return "closed"
 
-print("TC PASSED")

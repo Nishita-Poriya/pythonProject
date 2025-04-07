@@ -1,4 +1,5 @@
 import pytest
+
 @pytest.fixture()
 def create_token():
     return "abc"
